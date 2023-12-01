@@ -8,13 +8,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {useContext, useEffect, useState} from 'react';
-
+import {useRef} from 'react'
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from "react-router-dom";
 
+import ReCAPTCHA from "react-google-recaptcha"
 
 import { authContext } from "../../App";
 import axios from "axios"
@@ -59,6 +60,8 @@ export default function Login() {
             setLoginError('نام کاربری یا کلمه عبور خالی است');
             return;
         }
+        const token = captchaRef.current.getValue();
+        captchaRef.current.reset();
 
         // Assuming you have an API for authentication
         try {
@@ -95,6 +98,7 @@ export default function Login() {
 
         }
     };
+    const captchaRef = useRef(null)
 
     return (
         <Container component="main" maxWidth="xs">
@@ -146,6 +150,9 @@ export default function Login() {
                             ),
                         }}
                     />
+                    <ReCAPTCHA
+                        sitekey={"6Lc6zx4pAAAAAP0LIg8UInasgQ_71Gso32mC7e1J"}
+                    />
                     <Button
                         type="submit"
                         fullWidth
@@ -160,6 +167,7 @@ export default function Login() {
                         </Typography>
                     )}
                 </Box>
+
             </Box>
         </Container>
     );

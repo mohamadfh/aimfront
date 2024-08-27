@@ -5,13 +5,13 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import * as React from "react";
 import NorthIcon from '@mui/icons-material/North';
-import LinearProgress from "@mui/material/LinearProgress";
+import RechartsToPng from "@mui/material/LinearProgress";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-
+import {useCurrentPng} from "recharts-to-png";
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import {
@@ -27,6 +27,9 @@ import {
     RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar
 } from 'recharts';
 import useGet from "../../Hooks/useGet";
+import LinearProgress from "@mui/material/LinearProgress";
+import {useRef} from "react";
+import {exportToPng} from "../../GlobalFunctions/ExportPNG";
 
 function Title(props) {
     return (
@@ -44,7 +47,6 @@ Title.propTypes = {
 function createData(id, key, value) {
     return {id, key, value};
 }
-
 
 
 function Info({data}) {
@@ -92,32 +94,54 @@ function Info({data}) {
 }
 
 function Spyder({data}) {
+
+    const chartRef = useRef();
+
     const containerStyle = {
         overflowX: 'auto', // Add horizontal scroll if needed
         overflowY: 'auto', // Add horizontal scroll if needed
     };
+
+    const chartConfig = {
+        type: 'png', // Output type
+        filename: 'chart.png', // File name
+    };
+
     return (<>
-        <React.Fragment>
-            <Title>نمودار عنکبوتی بلوک های موضوعی</Title>
+            {/*<React.Fragment>*/}
+            {/*<Title>نمودار عنکبوتی بلوک های موضوعی</Title>*/}
             {data.block_answer_count === undefined ? (
                 <div>loading</div>
             ) : (
-                <ResponsiveContainer minWidth={500}>
-                    <RadarChart outerRadius={"70%"} data={data.block_answer_count}>
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey="موضوع" textAnchor="start" />
+                // <Typography component={'div'} id={'chart-container'}>
+                    <ResponsiveContainer id={"chart-container"} minWidth={500}>
+                        <RadarChart outerRadius={"70%"} data={data.block_answer_count}>
+                            <PolarGrid/>
+                            <PolarAngleAxis dataKey="موضوع" textAnchor="start"/>
 
-                        <Radar name="به شدت موافق" dataKey="به شدت موافق" stroke="#8884d8" fill="#8884d8" fillOpacity={0.2} />
-                        <Radar name="موافق" dataKey="موافق" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.2} />
-                        <Radar name="مخالف" dataKey="مخالف" stroke="#590100" fill="#590100" fillOpacity={0.2} />
-                        <Radar name="به شدت مخالف" dataKey="به شدت مخالف" stroke="#ff7f0e" fill="#ff7f0e" fillOpacity={0.2} />
-                        <Radar name="غیرممکن یا ناموجود" dataKey="غیرممکن یا ناموجود" stroke="#d62728" fill="#d62728" fillOpacity={0.2} />
+                            <Radar name="به شدت موافق" dataKey="به شدت موافق" stroke="#8884d8" fill="#8884d8"
+                                   fillOpacity={0.2}/>
+                            <Radar name="موافق" dataKey="موافق" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.2}/>
+                            <Radar name="مخالف" dataKey="مخالف" stroke="#590100" fill="#590100" fillOpacity={0.2}/>
+                            <Radar name="به شدت مخالف" dataKey="به شدت مخالف" stroke="#ff7f0e" fill="#ff7f0e"
+                                   fillOpacity={0.2}/>
+                            <Radar name="غیرممکن یا ناموجود" dataKey="غیرممکن یا ناموجود" stroke="#d62728"
+                                   fill="#d62728" fillOpacity={0.2}/>
 
-                        <Legend/>
-                    </RadarChart>
-                </ResponsiveContainer>
+                            <Legend />
+                        </RadarChart>
+                        <button onClick={exportToPng}>Download Chart</button>
+
+                        {/*<RechartsToPng chartConfig={chartConfig}>*/}
+                        {/*    {({ toPng }) => (*/}
+                        {/*        <button onClick={() => toPng()}>Download Chart</button>*/}
+                        {/*    )}*/}
+                        {/*</RechartsToPng>*/}
+                    </ResponsiveContainer>
+                // </Typography>
+
             )}
-        </React.Fragment>
+            {/*</React.Fragment>*/}
         </>
     );
 }
@@ -128,7 +152,7 @@ function Ladder({data}) {
 
     const divStyle = {
         position: 'relative',
-        width:  `${leftPosition}%`,
+        width: `${leftPosition}%`,
     };
 
     const containerStyle = {
@@ -202,8 +226,6 @@ export default function GeneralReport() {
     );
 
 
-
-
     return (<Box
         component="main"
         sx={{
@@ -260,7 +282,7 @@ export default function GeneralReport() {
                             overflow: 'auto'
                         }}
                     >
-                       <Spyder data={data}/>
+                        <Spyder data={data}/>
                     </Paper>
                 </Grid>
 

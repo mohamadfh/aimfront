@@ -60,8 +60,8 @@ export default function Login() {
             setLoginError('نام کاربری یا کلمه عبور خالی است');
             return;
         }
-        const token = captchaRef.current.getValue();
-        captchaRef.current.reset();
+        // const token = captchaRef.current.getValue();
+        // captchaRef.current.reset();
 
         // Assuming you have an API for authentication
         try {
@@ -98,7 +98,7 @@ export default function Login() {
 
         }
     };
-    const captchaRef = useRef(null)
+    // const captchaRef = useRef(null)
 
     return (
         <Container component="main" maxWidth="xs">
@@ -150,9 +150,9 @@ export default function Login() {
                             ),
                         }}
                     />
-                    <ReCAPTCHA
-                        sitekey={"6Lc6zx4pAAAAAP0LIg8UInasgQ_71Gso32mC7e1J"}
-                    />
+                    {/*<ReCAPTCHA*/}
+                    {/*    sitekey={"6Lc6zx4pAAAAAP0LIg8UInasgQ_71Gso32mC7e1J"}*/}
+                    {/*/>*/}
                     <Button
                         type="submit"
                         fullWidth

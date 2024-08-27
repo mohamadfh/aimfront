@@ -19,6 +19,3 @@ jobs:
         docker build -t allyellow/aimf .
 
         docker push allyellow/aimf
-
-    - name: Cleanup
-      run: rm ssh_key

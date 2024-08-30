@@ -19,6 +19,7 @@ COPY --from=build /app/build /usr/share/nginx/html
 # Replace the default nginx configuration
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d/
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

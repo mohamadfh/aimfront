@@ -9,7 +9,6 @@ const AdminPanel = lazy(() =>
     import("../AdminPanel/AdminPanel")
 );
 const AccessIdentifier = ({ role , children}) => {
-
     if (role === "manager") {
         return <ManagerPanel> {children} </ManagerPanel>;
     } else if (role === "admin") {

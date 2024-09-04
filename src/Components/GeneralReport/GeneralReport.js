@@ -131,7 +131,7 @@ function Spyder({data}) {
 
                             <Legend />
                         </RadarChart>
-                        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                        <Box display="flex" justifyContent="center" alignItems="center">
                             <Button variant="contained" onClick={() => exportToPng("spyder-chart-container")}>
                                 دانلود نمودار
                             </Button>
@@ -188,7 +188,7 @@ function Ladder({data}) {
                     <p>جایگاه سازمان</p>
                 </div>
             </div>
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+            <Box display="flex" justifyContent="center" alignItems="center">
                 <Button variant="contained" onClick={() => exportToPng("ladder-chart-container")}>
                     دانلود نمودار
                 </Button>
@@ -201,9 +201,9 @@ function Ladder({data}) {
 function StatChart({data}) {
 
     return (
-        <React.Fragment id={"stat-chart-container"}>
+        <React.Fragment>
             <Title>امتیاز سازمان در هر بلوک موضوعی</Title>
-            <ResponsiveContainer minWidth={500}>
+            <ResponsiveContainer id={"stat-chart-container"} minWidth={500}>
                 <LineChart
                     // width={500}
                     // height={300}
@@ -222,7 +222,7 @@ function StatChart({data}) {
                     <Legend/>
                     <Line type="monotone" dataKey="score" stroke="#8884d8" activeDot={{r: 8}}/>
                 </LineChart>
-                <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                <Box display="flex" justifyContent="center" alignItems="center">
                     <Button variant="contained" onClick={() => exportToPng("stat-chart-container")}>
                         دانلود نمودار
                     </Button>

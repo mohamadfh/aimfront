@@ -65,7 +65,7 @@ function BlockBarChart({blockNo}) {
                         <Legend/>
                         <Bar dataKey="count" fill="#8884d8"/>
                     </BarChart>
-                    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                    <Box display="flex" justifyContent="center" alignItems="center">
                         <Button variant="contained" onClick={() => exportToPng("block-chart-container")}>
                             دانلود نمودار
                         </Button>
@@ -118,7 +118,7 @@ function QuestionBarChart({data}) {
                 <Legend/>
                 <Bar dataKey="count" fill="#8884d8"/>
             </BarChart>
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+            <Box display="flex" justifyContent="center" alignItems="center">
                 <Button variant="contained" onClick={() => exportToPng("question-chart-container")}>
                     دانلود نمودار
                 </Button>

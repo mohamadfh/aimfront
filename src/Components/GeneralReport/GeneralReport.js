@@ -3,6 +3,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import * as React from "react";
 import NorthIcon from '@mui/icons-material/North';
 import RechartsToPng from "@mui/material/LinearProgress";
@@ -114,7 +115,7 @@ function Spyder({data}) {
                 <div>loading</div>
             ) : (
                 // <Typography component={'div'} id={'chart-container'}>
-                    <ResponsiveContainer id={"chart-container"} minWidth={500}>
+                    <ResponsiveContainer id={"spyder-chart-container"} minWidth={500}>
                         <RadarChart outerRadius={"70%"} data={data.block_answer_count}>
                             <PolarGrid/>
                             <PolarAngleAxis dataKey="موضوع" textAnchor="start"/>
@@ -130,8 +131,11 @@ function Spyder({data}) {
 
                             <Legend />
                         </RadarChart>
-                        <button onClick={exportToPng}>Download Chart</button>
-
+                        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                            <Button variant="contained" onClick={() => exportToPng("spyder-chart-container")}>
+                                دانلود نمودار
+                            </Button>
+                        </Box>
                         {/*<RechartsToPng chartConfig={chartConfig}>*/}
                         {/*    {({ toPng }) => (*/}
                         {/*        <button onClick={() => toPng()}>Download Chart</button>*/}
@@ -168,7 +172,7 @@ function Ladder({data}) {
     };
 
     return (
-        <React.Fragment>
+        <React.Fragment id={"ladder-chart-container"}>
             <Title> نردبان بلوغ</Title>
             <div>
 
@@ -184,6 +188,11 @@ function Ladder({data}) {
                     <p>جایگاه سازمان</p>
                 </div>
             </div>
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                <Button variant="contained" onClick={() => exportToPng("ladder-chart-container")}>
+                    دانلود نمودار
+                </Button>
+            </Box>
         </React.Fragment>
     );
 }
@@ -192,7 +201,7 @@ function Ladder({data}) {
 function StatChart({data}) {
 
     return (
-        <React.Fragment>
+        <React.Fragment id={"stat-chart-container"}>
             <Title>امتیاز سازمان در هر بلوک موضوعی</Title>
             <ResponsiveContainer minWidth={500}>
                 <LineChart
@@ -213,6 +222,11 @@ function StatChart({data}) {
                     <Legend/>
                     <Line type="monotone" dataKey="score" stroke="#8884d8" activeDot={{r: 8}}/>
                 </LineChart>
+                <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                    <Button variant="contained" onClick={() => exportToPng("stat-chart-container")}>
+                        دانلود نمودار
+                    </Button>
+                </Box>
             </ResponsiveContainer>
         </React.Fragment>
     );

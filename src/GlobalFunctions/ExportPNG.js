@@ -2,8 +2,8 @@ import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 
-export const exportToPng = () => {
-    html2canvas(document.getElementById("chart-container")).then(function(canvas) {
+export const exportToPng = (containerID) => {
+    html2canvas(document.getElementById(containerID)).then(function(canvas) {
         // const url = canvas.toDataURL();
         // const anchor = document.createElement('a');
         // anchor.href = url;

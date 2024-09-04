@@ -6,10 +6,11 @@ import Box from "@mui/material/Box";
 import * as React from "react";
 import {useState, useEffect} from "react";
 import useGet from "../../Hooks/useGet";
-
+import {exportToPng} from "../../GlobalFunctions/ExportPNG";
 import Typography from '@mui/material/Typography';
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import Button from "@mui/material/Button";
 
 function Title(props) {
     return (
@@ -47,7 +48,7 @@ function BlockBarChart({blockNo}) {
     return (<>
         {data.answer_counts === undefined ? (<>loading</>) : (<React.Fragment>
                 <Title> آمار پاسخ سوالات بلوک </Title>
-                <ResponsiveContainer minWidth={400}>
+                <ResponsiveContainer id={"block-chart-container"} minWidth={400}>
                     <BarChart
                         data={chartData(data.answer_counts)}
                         margin={{
@@ -64,6 +65,11 @@ function BlockBarChart({blockNo}) {
                         <Legend/>
                         <Bar dataKey="count" fill="#8884d8"/>
                     </BarChart>
+                    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                        <Button variant="contained" onClick={() => exportToPng("block-chart-container")}>
+                            دانلود نمودار
+                        </Button>
+                    </Box>
                 </ResponsiveContainer>
             </React.Fragment>
         )}
@@ -95,7 +101,7 @@ function QuestionBarChart({data}) {
     }
     return (<>
         {data == undefined ? (<div>loading</div>) : (<>
-        <ResponsiveContainer  minWidth={500}>
+        <ResponsiveContainer id={"question-chart-container"} minWidth={500}>
             <BarChart
                 data={chartData(data)}
                 margin={{
@@ -112,6 +118,11 @@ function QuestionBarChart({data}) {
                 <Legend/>
                 <Bar dataKey="count" fill="#8884d8"/>
             </BarChart>
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                <Button variant="contained" onClick={() => exportToPng("question-chart-container")}>
+                    دانلود نمودار
+                </Button>
+            </Box>
          </ResponsiveContainer>
     </>)}
     </>);

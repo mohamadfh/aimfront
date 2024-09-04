@@ -43,8 +43,9 @@ function Navbar() {
         setProductsClick(true);
         setServicesClick(false);
     }
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const handleLogout = () => {
-        const URL = "http://localhost:8000/auth/logout/";
+        const URL = `${apiUrl}/auth/logout/`;
         const TOKEN = sessionStorage.getItem("token");
         axios
             .post(

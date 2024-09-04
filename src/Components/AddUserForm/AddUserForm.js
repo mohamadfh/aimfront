@@ -62,7 +62,8 @@ const AddUserForm = ({updateTable}) => {
                     'Authorization': `Token ${TOKEN}`
                 }
             };
-            const response = await axios.post('http://localhost:8000/auth/register/', payload,customConfig);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            const response = await axios.post(`${apiUrl}/auth/register/`, payload,customConfig);
 
             if (response.status === 200) {
                 setShowForm(false)

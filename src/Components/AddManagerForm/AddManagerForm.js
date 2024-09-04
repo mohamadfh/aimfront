@@ -27,14 +27,14 @@ const AddManagerForm = ({updateTable}) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     // URL to fetch data from
-    const apiUrl = `http://localhost:8000/api/organizations/`; // Replace with your API URL
+    const endpointUrl = `${apiUrl}/api/organizations/`; // Replace with your API URL
     const TOKEN = sessionStorage.getItem("token")
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(apiUrl, {
+                const response = await axios.get(endpointUrl, {
                     headers: {Authorization: `Token ${TOKEN}`},
                 });
                 setData(response.data);
@@ -46,7 +46,7 @@ const AddManagerForm = ({updateTable}) => {
         };
 
         fetchData();
-    }, [apiUrl, update]); // Add any dependencies that should trigger the fetch
+    }, [endpointUrl, update]); // Add any dependencies that should trigger the fetch
 
     const [showForm, setShowForm] = useState(false);
     const [registerError, setRegisterError] = useState(false);
@@ -95,7 +95,8 @@ const AddManagerForm = ({updateTable}) => {
                     'Authorization': `Token ${TOKEN}`
                 }
             };
-            const response = await axios.post('http://localhost:8000/auth/register/manager/', payload, customConfig);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            const response = await axios.post(`${apiUrl}/auth/register/manager/`, payload, customConfig);
 
             if (response.status === 200) {
                 setShowForm(false)

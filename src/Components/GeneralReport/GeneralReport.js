@@ -219,9 +219,9 @@ function StatChart({data}) {
 }
 
 export default function GeneralReport() {
-
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const {data, error} = useGet(
-        "http://localhost:8000/api/organizations/report",
+        `${apiUrl}/api/organizations/report`,
         sessionStorage.getItem("token")
     );
 

@@ -21,8 +21,9 @@ function Title(props) {
 
 
 function BlockBarChart({blockNo}) {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const {data, error} = useGet(
-        `http://localhost:8000/api/blocks/${blockNo}/report`,
+        `${apiUrl}/api/blocks/${blockNo}/report`,
         sessionStorage.getItem("token")
     );
     const optionsList = [
@@ -118,9 +119,9 @@ function QuestionBarChart({data}) {
 
 function Questionreport({blockNo}) {
     const [currentQuestion, setCurrentQuestion] = useState(-1);
-
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const {data, error} = useGet(
-        `http://localhost:8000/api/blocks/${blockNo}/count`,
+        `${apiUrl}/api/blocks/${blockNo}/count`,
         sessionStorage.getItem("token")
     );
     const dataArray = Array.from(data);
@@ -170,8 +171,9 @@ function Questionreport({blockNo}) {
 
 export default function Blockreport() {
     const [currentBlock, setcurrentBlock] = useState(1);
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const {data, error} = useGet(
-        `http://localhost:8000/api/blocks/`,
+        `${apiUrl}/api/blocks/`,
         sessionStorage.getItem("token")
     );
 

@@ -73,7 +73,8 @@ export default function Login() {
                 }
             };
             // Send a request to your authentication server with formData
-            const response = await axios.post('http://localhost:8000/auth/login/', payload,customConfig);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            const response = await axios.post(`${apiUrl}/auth/login/`, payload,customConfig);
 
             if (response.status === 200) {
 

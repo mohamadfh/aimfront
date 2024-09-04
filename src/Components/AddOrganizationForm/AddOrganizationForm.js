@@ -56,7 +56,8 @@ const AddOrganizationForm = ({updateTable}) => {
                     'Authorization': `Token ${TOKEN}`
                 }
             };
-            const response = await axios.post('http://localhost:8000/api/organizations/', payload,customConfig);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            const response = await axios.post(`${apiUrl}/api/organizations/`, payload,customConfig);
 
             if (response.status === 200) {
                 setShowForm(false)

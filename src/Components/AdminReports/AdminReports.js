@@ -47,8 +47,9 @@ Title.propTypes = {
 
 
 function BlockBarChart({blockNo , org_id}) {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const {data, error} = useGet(
-        `http://localhost:8000/api/blocks/${blockNo}/report/${org_id}/`,
+        `${apiUrl}/api/blocks/${blockNo}/report/${org_id}/`,
         sessionStorage.getItem("token")
     );
     const optionsList = [
@@ -144,9 +145,9 @@ function QuestionBarChart({data}) {
 
 function Questionreport({blockNo , org_id}) {
     const [currentQuestion, setCurrentQuestion] = useState(-1);
-
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const {data, error} = useGet(
-        `http://localhost:8000/api/blocks/${blockNo}/count/${org_id}/`,
+        `${apiUrl}/api/blocks/${blockNo}/count/${org_id}/`,
         sessionStorage.getItem("token")
     );
     const dataArray = Array.from(data);
@@ -195,9 +196,10 @@ function Questionreport({blockNo , org_id}) {
 }
 
 function AdminBlockreport({org_id}) {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const [currentBlock, setcurrentBlock] = useState(1);
     const {data, error} = useGet(
-        `http://localhost:8000/api/blocks/`,
+        `${apiUrl}/api/blocks/`,
         sessionStorage.getItem("token")
     );
 
@@ -394,9 +396,9 @@ function StatChart({data}) {
 }
 
 function AdminGeneralReport({org_id}) {
-
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const {data, error} = useGet(
-        `http://localhost:8000/api/organizations/report/${org_id}/`,
+        `${apiUrl}/api/organizations/report/${org_id}/`,
         sessionStorage.getItem("token")
     );
 

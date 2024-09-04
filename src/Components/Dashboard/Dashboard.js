@@ -20,9 +20,9 @@ import useGet from "../../Hooks/useGet";
 const Dashboard = ({children}) => {
     const navigator = useNavigate();
     const nav = useCallback((url) => navigator(url), [navigator]);
-
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const {data} = useGet(
-        "http://localhost:8000/auth/whoami/role/",
+        `${apiUrl}/auth/whoami/role/`,
         sessionStorage.getItem("token")
     );
 

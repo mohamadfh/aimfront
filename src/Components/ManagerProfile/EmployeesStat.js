@@ -18,14 +18,14 @@ export default function DataGridDemo() {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     // URL to fetch data from
-    const apiUrl = `http://localhost:8000/api/organizations/`; // Replace with your API URL
+    const endpointUrl = `${apiUrl}/api/organizations/`; // Replace with your API URL
     const TOKEN = sessionStorage.getItem("token")
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(apiUrl , {
+                const response = await axios.get(endpointUrl , {
                     headers: { Authorization: `Token ${TOKEN}` },
                 });
                 setData(response.data);
@@ -37,7 +37,7 @@ export default function DataGridDemo() {
         };
 
         fetchData();
-    }, [apiUrl , update]); // Add any dependencies that should trigger the fetch
+    }, [endpointUrl , update]); // Add any dependencies that should trigger the fetch
 
     const handleDelete = (userId) => {
         // Make an API call to delete the user with the given ID
@@ -111,8 +111,8 @@ export default function DataGridDemo() {
                     'Authorization': `Token ${TOKEN}`
                 }
             };
-
-            const response = await axios.put(`http://localhost:8000/auth/register/${editedData.id}/`, payload,customConfig);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            const response = await axios.put(`${apiUrl}/auth/register/${editedData.id}/`, payload,customConfig);
 
             if (response.status === 200) {
                 console.log("edited")
@@ -147,8 +147,8 @@ export default function DataGridDemo() {
                     'Authorization': `Token ${TOKEN}`
                 }
             };
-
-            const response = await axios.delete(`http://localhost:8000/auth/register/${editedData.id}/`,customConfig);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            const response = await axios.delete(`${apiUrl}/auth/register/${editedData.id}/`,customConfig);
 
             if (response.status === 200) {
                 console.log("deleted")

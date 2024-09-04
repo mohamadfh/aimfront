@@ -31,9 +31,10 @@ export const submitHandler = (
         dispatch({ type: "VALID-PASSWORD", payload: true });
         validPassword = true;
     }
+
     if (validUsername && validPassword) {
         axios
-            .post("http://localhost:8000/auth/login/", {
+            .post(`http://127.0.0.1:8000/auth/login/`, {
                 username: state.username,
                 password: state.password,
             })

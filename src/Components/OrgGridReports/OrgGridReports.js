@@ -16,12 +16,13 @@ export default function OrgGridReports({showBlockReport , showGeneralReport}) {
     const [error, setError] = useState(null);
 
     // URL to fetch data from
-    const apiUrl = `http://localhost:8000/api/organizations/`; // Replace with your API URL
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+    const endpointUrl = `${apiUrl}/api/organizations/`; // Replace with your API URL
     const TOKEN = sessionStorage.getItem("token")
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(apiUrl , {
+                const response = await axios.get(endpointUrl , {
                     headers: { Authorization: `Token ${TOKEN}` },
                 });
                 setData(response.data);
@@ -33,7 +34,7 @@ export default function OrgGridReports({showBlockReport , showGeneralReport}) {
         };
 
         fetchData();
-    }, [apiUrl , update]); // Add any dependencies that should trigger the fetch
+    }, [endpointUrl , update]); // Add any dependencies that should trigger the fetch
 
 
 

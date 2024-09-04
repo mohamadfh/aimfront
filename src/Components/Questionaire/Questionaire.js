@@ -40,10 +40,10 @@ const buttonBarStyle = {
 };
 
 function Questionaire() {
-
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const [currentBlock, setCurrentBlock] = useState(1)
     const {data, error} = useGet(
-        `http://localhost:8000/api/blocks/${currentBlock}/`,
+        `${apiUrl}/api/blocks/${currentBlock}/`,
         sessionStorage.getItem("token")
     );
 
@@ -52,16 +52,17 @@ function Questionaire() {
 
 
     useEffect(() => {
+
         const TOKEN = sessionStorage.getItem("token");
         axios
-            .get("http://localhost:8000/api/submitbulk", {
+            .get(`${apiUrl}/api/submitbulk`, {
                 headers: { Authorization: `Token ${TOKEN}` },
             }).then((ans) => {
                 setSubmitcheck(ans.data);
             }).catch((e) => {
                 setError2(e);
             });
-    }, []);
+    }, [apiUrl]);
     const [answers, setAnswers] = useState({});
     const handleAnswerSelect = (questionId, selectedOption) => {
         setAnswers((prevState) => {

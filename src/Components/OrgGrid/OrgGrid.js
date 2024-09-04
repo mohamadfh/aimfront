@@ -20,12 +20,13 @@ export default function OrgGrid() {
     const [error, setError] = useState(null);
 
     // URL to fetch data from
-    const apiUrl = `http://localhost:8000/api/organizations/`; // Replace with your API URL
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+    const endpointUrl = `${apiUrl}/api/organizations/`; // Replace with your API URL
     const TOKEN = sessionStorage.getItem("token")
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(apiUrl , {
+                const response = await axios.get(endpointUrl , {
                     headers: { Authorization: `Token ${TOKEN}` },
                 });
                 setData(response.data);
@@ -37,7 +38,7 @@ export default function OrgGrid() {
         };
 
         fetchData();
-    }, [apiUrl , update]); // Add any dependencies that should trigger the fetch
+    }, [endpointUrl , update]); // Add any dependencies that should trigger the fetch
 
 
     const columns = [
@@ -87,8 +88,8 @@ export default function OrgGrid() {
                     'Authorization': `Token ${TOKEN}`
                 }
             };
-
-            const response = await axios.put(`http://localhost:8000/api/organizations/${editedData.id}/`, payload,customConfig);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            const response = await axios.put(`${apiUrl}/api/organizations/${editedData.id}/`, payload,customConfig);
 
             if (response.status === 200) {
 
@@ -123,8 +124,8 @@ export default function OrgGrid() {
                     'Authorization': `Token ${TOKEN}`
                 }
             };
-
-            const response = await axios.delete(`http://localhost:8000/api/organizations/${editedData.id}/`,customConfig);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            const response = await axios.delete(`${apiUrl}/api/organizations/${editedData.id}/`,customConfig);
 
             if (response.status === 200) {
             } else {

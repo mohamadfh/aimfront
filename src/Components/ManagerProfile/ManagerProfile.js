@@ -25,8 +25,10 @@ Title.propTypes = {
 
 
 function UserInfoBox() {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
     const {data, error} = useGet(
-        `http://localhost:8000/auth/whoami/`,
+        `${apiUrl}/auth/whoami/`,
         sessionStorage.getItem("token")
     );
 

@@ -18,14 +18,14 @@ export default function ManagerGrid() {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     // URL to fetch data from
-    const apiUrl = `http://localhost:8000/auth/register/manager/`; // Replace with your API URL
+    const endpointUrl = `${apiUrl}/auth/register/manager/`; // Replace with your API URL
     const TOKEN = sessionStorage.getItem("token")
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(apiUrl , {
+                const response = await axios.get(endpointUrl , {
                     headers: { Authorization: `Token ${TOKEN}` },
                 });
                 setData(response.data);
@@ -37,7 +37,7 @@ export default function ManagerGrid() {
         };
 
         fetchData();
-    }, [apiUrl , update]); // Add any dependencies that should trigger the fetch
+    }, [endpointUrl , update]); // Add any dependencies that should trigger the fetch
 
 
     const columns = [
@@ -103,8 +103,9 @@ export default function ManagerGrid() {
                     'Authorization': `Token ${TOKEN}`
                 }
             };
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
-            const response = await axios.put(`http://localhost:8000/auth/register/manager/${editedData.id}/`, payload,customConfig);
+            const response = await axios.put(`${apiUrl}/auth/register/manager/${editedData.id}/`, payload,customConfig);
 
             if (response.status === 200) {
                 console.log("edited")
@@ -139,8 +140,9 @@ export default function ManagerGrid() {
                     'Authorization': `Token ${TOKEN}`
                 }
             };
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
-            const response = await axios.delete(`http://localhost:8000/auth/register/manager/${editedData.id}/`,customConfig);
+            const response = await axios.delete(`${apiUrl}/auth/register/manager/${editedData.id}/`,customConfig);
 
             if (response.status === 200) {
             } else {

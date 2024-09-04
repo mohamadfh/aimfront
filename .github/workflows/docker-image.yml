@@ -16,6 +16,7 @@ jobs:
 
     - name: Build and push Docker images
       run: |
+        echo ${{ secrets.REACT_APP_API_URL }}
         docker build \
           --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} \
           -t allyellow/aimf .

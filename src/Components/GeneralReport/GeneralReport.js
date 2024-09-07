@@ -131,11 +131,9 @@ function Spyder({data}) {
 
                             <Legend />
                         </RadarChart>
-                        <Box display="flex" justifyContent="center" alignItems="center">
-                            <Button variant="contained" onClick={() => exportToPng("spyder-chart-container")}>
-                                دانلود نمودار
-                            </Button>
-                        </Box>
+                        <Button variant="contained" onClick={() => exportToPng("spyder-chart-container")}>
+                            دانلود نمودار
+                        </Button>
                         {/*<RechartsToPng chartConfig={chartConfig}>*/}
                         {/*    {({ toPng }) => (*/}
                         {/*        <button onClick={() => toPng()}>Download Chart</button>*/}
@@ -172,27 +170,27 @@ function Ladder({data}) {
     };
 
     return (
-        <React.Fragment id={"ladder-chart-container"}>
-            <Title> نردبان بلوغ</Title>
-            <div>
+        <React.Fragment>
+            <ResponsiveContainer id={"ladder-chart-container"} minWidth={500}>
+                <Title> نردبان بلوغ</Title>
+                <div>
 
-                <img width="100%" height="100%" src={require("../../Assets/Images/ai-maturity-ladder.svg").default}/>
-                <LinearProgress variant="determinate" value={data.total_score} className="progress-bar"/>
+                    <img width="100%" height="100%" src={require("../../Assets/Images/ai-maturity-ladder.svg").default}/>
+                    <LinearProgress variant="determinate" value={data.total_score} className="progress-bar"/>
 
-            </div>
-            <div style={parentStyle}>
-                <div style={divStyle}>
                 </div>
-                <div style={containerStyle}>
-                    <NorthIcon className="icon" style={{fontSize: "2rem", color: "red"}}/>
-                    <p>جایگاه سازمان</p>
+                <div style={parentStyle}>
+                    <div style={divStyle}>
+                    </div>
+                    <div style={containerStyle}>
+                        <NorthIcon className="icon" style={{fontSize: "2rem", color: "red"}}/>
+                        <p>جایگاه سازمان</p>
+                    </div>
                 </div>
-            </div>
-            <Box display="flex" justifyContent="center" alignItems="center">
                 <Button variant="contained" onClick={() => exportToPng("ladder-chart-container")}>
                     دانلود نمودار
                 </Button>
-            </Box>
+            </ResponsiveContainer>
         </React.Fragment>
     );
 }
@@ -222,11 +220,9 @@ function StatChart({data}) {
                     <Legend/>
                     <Line type="monotone" dataKey="score" stroke="#8884d8" activeDot={{r: 8}}/>
                 </LineChart>
-                <Box display="flex" justifyContent="center" alignItems="center">
-                    <Button variant="contained" onClick={() => exportToPng("stat-chart-container")}>
-                        دانلود نمودار
-                    </Button>
-                </Box>
+                <Button variant="contained" onClick={() => exportToPng("stat-chart-container")}>
+                    دانلود نمودار
+                </Button>
             </ResponsiveContainer>
         </React.Fragment>
     );

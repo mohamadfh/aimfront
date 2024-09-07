@@ -1,21 +1,13 @@
-import domtoimage from 'dom-to-image';
-import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 
-export const exportToPng = (containerID) => {
+export const exportToPng = (containerID, fileName = 'chart.png') => {
     html2canvas(document.getElementById(containerID)).then(function(canvas) {
-        // const url = canvas.toDataURL();
-        // const anchor = document.createElement('a');
-        // anchor.href = url;
-        // anchor.click();
 
-        function callback(blob){
-            console.log(blob);
-            // const file = new File(blob, "chart.png");
+        function callback(blob) {
             const url = URL.createObjectURL(blob);
             const element = document.createElement('a');
             element.href = url;
-            element.download=true;
+            element.download = fileName;  // Set the desired file name here
             element.click();
         }
 
